@@ -21,7 +21,25 @@ Level::~Level()
 // handle user input
 void Level::handleInput(float dt)
 {
+	if (input->isKeyDown(sf::Keyboard::Up))
+	{
+		speedy -= 10;
+	}
 
+	if (input->isKeyDown(sf::Keyboard::Down))
+	{
+		speedy += 10;
+	}
+
+	if (input->isKeyDown(sf::Keyboard::Left))
+	{
+		speedx -= 10;
+	}
+
+	if (input->isKeyDown(sf::Keyboard::Right))
+	{
+		speedx += 10;
+	}
 }
 
 // Update game objects
