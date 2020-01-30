@@ -9,7 +9,8 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	rectRed.setSize(sf::Vector2f(50, 50));
 	rectRed.setPosition(100, 100);
 	rectRed.setFillColor(sf::Color::Red);
-	speedx = 100.f;
+	speedx = 500.f;
+	speedy = 500.f;
 }
 
 Level::~Level()
@@ -26,10 +27,29 @@ void Level::handleInput(float dt)
 // Update game objects
 void Level::update(float dt)
 {
-	rectRed.move(speed * dt, 0);
-	sf::Vector2u pos = window->getSize();
-	rectGreen2.setPosition((pos.x - 50), (pos.y - 50));
-}
+	rectRed.move(speedx * dt, speedy * dt);
+	sf::Vector2u winPos = window->getSize(); //Vector2u creating variable with two values (unsigned variable)
+	sf::Vector2f objPos = rectRed.getPosition();//Vector2f creating variable with two values (float variable)
+	if (objPos.x+50 > winPos.x)
+	{
+		speedx = speedx * -1;
+	}
+	
+	if (objPos.y+50 > winPos.y)
+	{
+		speedy = speedy * -1;
+	}
+
+	if (objPos.x < 0)
+	{
+		speedx = speedx * -1;
+	}
+
+	if (objPos.y < 0)
+	{
+		speedy = speedy * -1;
+	}
+}	
 
 // Render level
 void Level::render()
